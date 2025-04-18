@@ -21,7 +21,7 @@ exports.getStudentCosts = async (req, res) => {
 };
 
 exports.getServicesByDate = async (req, res) => {
- 
+
   const { start_date, end_date } = req.query;
 
   let filter = {};
@@ -35,7 +35,7 @@ exports.getServicesByDate = async (req, res) => {
 
   try {
     const students = await Student.find(filter);
-    
+
     const result = students.map(student => ({
       name: student.name,
       services: student.services_used.map(service => ({
@@ -50,7 +50,7 @@ exports.getServicesByDate = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  
+
 };
 
 exports.getGuestVisits = async (req, res) => {
@@ -108,7 +108,7 @@ exports.getServicesCost = async (req, res) => {
         const endDate = new Date(service.end_date);
 
         if (!start_date && !end_date ||
-            (startDate >= new Date(start_date) && endDate <= new Date(end_date))) {
+          (startDate >= new Date(start_date) && endDate <= new Date(end_date))) {
           const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
 
           if (!revenueByService[serviceName]) {
