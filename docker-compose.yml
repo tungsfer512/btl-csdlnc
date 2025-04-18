@@ -1,0 +1,26 @@
+services:
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - ./config:/app/config
+      - ./controllers:/app/controllers
+      - ./middleware:/app/middleware
+      - ./models:/app/models
+      - ./routes:/app/routes
+      - ./server.js:/app/server.js
+    restart: always
+  mongo:
+    image: mongo
+    container_name: mongo
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: mongo
+    #   MONGO_INITDB_ROOT_PASSWORD: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-data:/data/db
+    restart: always
